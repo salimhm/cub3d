@@ -10,7 +10,8 @@ SRCS_PARSING	=	./parsing/utils.c \
 				./parsing/check_elements.c \
 				./parsing/rgb.c\
 				./parsing/check_map.c\
-				./parsing/check_map2.c
+				./parsing/check_map2.c\
+				./parsing/check_map3.c\
 
 LIBFT		=	make -C ./libft
 

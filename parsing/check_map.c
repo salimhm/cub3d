@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 21:15:48 by shmimi            #+#    #+#             */
-/*   Updated: 2023/08/14 23:08:33 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/08/15 20:50:48 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,11 @@ void check_map2(int fd)
     {
         if (!line)
             break;
+        // if (ft_strncmp(line, "\n", 2) == 0)
+        // {
+        //     printf("here line => %s\n", line);
+        //     printf("here buffer => %s\n", buffer);
+        // }
         buffer = ft_strjoin(buffer, line);
         free(line);
         line = get_next_line(fd);
@@ -119,11 +124,12 @@ void check_map2(int fd)
     free(buffer);
     check_elements(essentials);
     check_duplicates(&essentials);
+    // check_empty_lines(essentials, file);
     check_first_n_last(essentials);
     check_corners(essentials);
     check_player_duplicates(essentials);
+    check_weird_chars(essentials);
     check_valid_path(essentials);
-    // check_map3(essentials);
 }
 
 int check_map(int fd, char *map)
