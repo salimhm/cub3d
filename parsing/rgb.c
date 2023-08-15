@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 20:30:45 by shmimi            #+#    #+#             */
-/*   Updated: 2023/08/14 19:28:58 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/08/14 22:38:56 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void rgb_check2(char **rgb, char **element, t_parse_map essentials)
                 ft_putstr_fd("Error: invalid rgb character\n", 2);
                 free2d(rgb);
                 free2d(essentials.map);
-                free2d(essentials.duplicates);
                 free2d(element);
                 exit(1);
             }
@@ -86,7 +85,6 @@ void rgb_check(char *rgbs, char **element, t_parse_map essentials)
         ft_putstr_fd("Error: invalid rgb element\n", 2);
         free2d(rgb);
         free2d(essentials.map);
-        free2d(essentials.duplicates);
         free2d(element);
         exit(1);
     }
@@ -99,7 +97,6 @@ void rgb_check(char *rgbs, char **element, t_parse_map essentials)
             ft_putstr_fd("Error: invalid rgb color\n", 2);
             free2d(rgb);
             free2d(essentials.map);
-            free2d(essentials.duplicates);
             free2d(element);
             exit(1);
         }

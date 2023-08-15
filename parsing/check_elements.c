@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 20:29:18 by shmimi            #+#    #+#             */
-/*   Updated: 2023/08/14 19:30:54 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/08/14 22:37:49 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,15 @@ int check_elements2(t_parse_map essentials)
     while (i < 6)
     {
         element = ft_split_origin(essentials.map[i], ' ');
-        if (element[2])
+        if (ft_strlen_2d(element) > 2)
         {
             ft_putstr_fd("Error: invalid element\n", 2);
             free2d(essentials.map);
-            free2d(essentials.duplicates);
             free2d(element);
             exit(1);
         }
         if (is_rgb(element[0]))
             rgb_check(element[1], element, essentials);
-        free2d(element);
-        element = NULL;
         i++;
     }
     return 0;
@@ -79,7 +76,6 @@ void check_all_elements(t_parse_map essentials)
     {
         ft_putstr_fd("Error: one or more elements is missing\n", 2);
         free2d(essentials.map);
-        free2d(essentials.duplicates);
         exit(1);
     }
 }
@@ -100,7 +96,6 @@ int check_elements(t_parse_map essentials)
         {
             ft_putstr_fd("Error: invalid element\n", 2);
             free2d(essentials.map);
-            free2d(essentials.duplicates);
             free2d(element);
             exit(1);
         }
@@ -111,7 +106,6 @@ int check_elements(t_parse_map essentials)
             {
                 ft_putstr_fd("Error: invalid element texture\n", 2);
                 free2d(essentials.map);
-                free2d(essentials.duplicates);
                 free2d(element);
                 exit(1);
             }
@@ -148,7 +142,6 @@ void check_duplicates(t_parse_map *essentials)
         {
             free2d(essentials->duplicates);
             free2d(essentials->map);
-            free2d(element);
             ft_putstr_fd("Error: duplicate elements detected\n", 2);
             exit(1);
         }
@@ -156,5 +149,4 @@ void check_duplicates(t_parse_map *essentials)
             j = 0;
         i++;
     }
-    // check_map3(essentials);
 }

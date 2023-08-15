@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 21:15:48 by shmimi            #+#    #+#             */
-/*   Updated: 2023/08/14 19:41:21 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/08/14 23:08:33 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,9 @@ void check_map2(int fd)
     check_duplicates(&essentials);
     check_first_n_last(essentials);
     check_corners(essentials);
+    check_player_duplicates(essentials);
+    check_valid_path(essentials);
+    // check_map3(essentials);
 }
 
 int check_map(int fd, char *map)

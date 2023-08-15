@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 16:20:18 by shmimi            #+#    #+#             */
-/*   Updated: 2023/08/14 19:28:41 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/08/14 23:08:49 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void print_map(char **map);
 //Check map
 int check_map(int fd, char *map);
 void check_map3(t_parse_map essentials);
+void check_valid_path(t_parse_map essentials);
 
 //Check map elements
 int check_elements(t_parse_map essentials);
@@ -45,5 +46,6 @@ void rgb_check(char *rgbs, char **element, t_parse_map essentials);
 void rgb_check2(char **rgb, char **element, t_parse_map essentials);
 void check_duplicates(t_parse_map *essentials);
 int check_elements_existance(char *element);
+void check_player_duplicates(t_parse_map essentials);
 
 #endif
