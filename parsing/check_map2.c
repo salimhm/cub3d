@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 23:17:20 by shmimi            #+#    #+#             */
-/*   Updated: 2023/08/15 20:15:29 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/08/23 05:55:10 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void check_player_duplicates(t_parse_map essentials)
         }
         i++;
     }
+    free(player);
 }
 
 void check_valid_path(t_parse_map essentials)
@@ -85,7 +86,9 @@ void check_valid_path(t_parse_map essentials)
     int j;
     int count;
     int hold;
+    char starting_pos;
 
+    starting_pos = get_starting_pos(essentials);
     count = 0;
     i = 0;
     hold = check_valid_path1(&essentials, i, &count);
@@ -100,14 +103,15 @@ void check_valid_path(t_parse_map essentials)
     i = 0;
     i++;
     j = i + 1;
-    check_valid_path2(i, j, count, essentials);
-    check_valid_path3(essentials, count);
+    check_valid_path2(i, j, count, essentials, starting_pos);
+    check_valid_path3(essentials, count, starting_pos);
     free2d(essentials.dummy_map);
 }
 
-void check_valid_path2(int i, int j, int count, t_parse_map essentials)
+void check_valid_path2(int i, int j, int count, t_parse_map essentials, char starting_pos)
 {
     int k;
+    (void)starting_pos;
     while (i < count)
     {
         if (!essentials.dummy_map[j])
@@ -117,9 +121,10 @@ void check_valid_path2(int i, int j, int count, t_parse_map essentials)
             k = ft_strlen(essentials.dummy_map[j]) - 1;
             while (essentials.dummy_map[i][k])
             {
-                if ((essentials.dummy_map[i][k] == '0' && essentials.dummy_map[i + 1][k] == '\0') || (essentials.dummy_map[i][k] == ' ' && essentials.dummy_map[i + 1][k] == '\0'))
+                if ((essentials.dummy_map[i][k] == '0' && essentials.dummy_map[i + 1][k] == '\0') || (essentials.dummy_map[i][k] == ' ' && essentials.dummy_map[i + 1][k] == '\0' && essentials.dummy_map[i - 1][k] != '\0'))
                 {
-                    ft_putstr_fd("Error: invalid map!\n", 2);
+                    ft_putstr_fd("Error: invalid maps!\n", 2);
+                    printf("|%c| %d %d\n", essentials.dummy_map[i][k], i, k);
                     free2d(essentials.map);
                     free2d(essentials.duplicates);
                     free2d(essentials.dummy_map);
@@ -133,21 +138,23 @@ void check_valid_path2(int i, int j, int count, t_parse_map essentials)
     }
 }
 
-void check_valid_path3(t_parse_map essentials, int count)
+void check_valid_path3(t_parse_map essentials, int count, char starting_pos)
 {
     int i;
     int k;
 
     i = 0;
     k = 0;
+    // (void)starting_pos;
     while (i < count)
     {
         k = 0;
         while (essentials.dummy_map[i][k])
         {
-            if ((essentials.dummy_map[i][k] == '0' && essentials.dummy_map[i + 1][k] == ' '))
+            if (((essentials.dummy_map[i][k] == '0' || essentials.dummy_map[i][k] == starting_pos) && (essentials.dummy_map[i + 1][k] == ' ' || essentials.dummy_map[i - 1][k] == ' ')))
             {
                 ft_putstr_fd("Error: invalid map!\n", 2);
+                printf("|%c| %d %d\n", essentials.dummy_map[i][k], i, k);
                 free2d(essentials.map);
                 free2d(essentials.duplicates);
                 free2d(essentials.dummy_map);

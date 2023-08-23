@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 21:15:48 by shmimi            #+#    #+#             */
-/*   Updated: 2023/08/15 20:50:48 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/08/23 05:56:13 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void print_map(char **map)
     }
 }
 
-void check_map2(int fd)
+void check_map2(int fd, char *file)
 {
     t_parse_map essentials;
     char *line;
@@ -110,33 +110,31 @@ void check_map2(int fd)
     {
         if (!line)
             break;
-        // if (ft_strncmp(line, "\n", 2) == 0)
-        // {
-        //     printf("here line => %s\n", line);
-        //     printf("here buffer => %s\n", buffer);
-        // }
         buffer = ft_strjoin(buffer, line);
         free(line);
         line = get_next_line(fd);
     }
     free(line);
+    close(fd);
     essentials.map = ft_split_origin(buffer, '\n');
     free(buffer);
     check_elements(essentials);
     check_duplicates(&essentials);
-    // check_empty_lines(essentials, file);
+    // (void)file;
+    check_empty_lines(essentials, file);
     check_first_n_last(essentials);
     check_corners(essentials);
     check_player_duplicates(essentials);
     check_weird_chars(essentials);
     check_valid_path(essentials);
+    // print_map(essentials.map);
 }
 
-int check_map(int fd, char *map)
+int check_map(int fd, char *file)
 {
     char *extension;
 
-    extension = ft_strchr(map, '.');
+    extension = ft_strchr(file, '.');
     if (fd < 0)
     {
         ft_putstr_fd("Error: map not found!\n", 2);
@@ -152,6 +150,6 @@ int check_map(int fd, char *map)
         ft_putstr_fd("Error: rename the extention to .cub\n", 2);
         return 1;
     }
-    check_map2(fd);
+    check_map2(fd, file);
     return 0;
 }
