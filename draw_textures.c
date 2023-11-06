@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 23:12:15 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/06 21:07:59 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/07 00:10:39 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int get_color(t_texture_data *textures, int x, int y)
 
 void draw_textures(t_texture_data *textures, t_data *data)
 {
-    char *img_path = "./textures/4.xpm";
+    char *img_path = "./textures/6.xpm";
     void *img;
     if (img_path)
     {

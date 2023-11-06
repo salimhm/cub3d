@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:28:47 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/06 21:02:56 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/07 00:10:01 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 
 typedef struct s_arg
 {
+	char **elements;
 	float	x;
 	float	y;
 	float	px;
@@ -48,6 +49,7 @@ typedef struct s_arg
 	float	mapx;
 	char	**map;
 	float	r_angle;
+
 }			t_map;
 
 typedef struct s_data
@@ -97,26 +99,72 @@ typedef struct s_data
 	t_map	*call;
 }			t_data;
 
-
-typedef struct s_texture_data
+typedef struct s_texture_north
 {
-	char 	*addr;
+	char *img_addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
 	int img_width;
 	int img_height;
-	char *img_addr;
-}	t_texture_data;
+}	t_texture_north;
 
+typedef struct s_texture_south
+{
+	char *img_addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int img_width;
+	int img_height;
+}	t_texture_south;
+
+typedef struct s_texture_west
+{
+	char *img_addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int img_width;
+	int img_height;
+}	t_texture_west;
+
+typedef struct s_texture_east
+{
+	char *img_addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int img_width;
+	int img_height;
+}	t_texture_east;
+
+
+typedef struct s_texture_data
+{
+	char *img_addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int img_width;
+	int img_height;
+
+
+	t_texture_north north;
+	t_texture_north south;
+	t_texture_north west;
+	t_texture_north east;
+}	t_texture_data;
 
 typedef struct s_parse_map
 {
+	char 	**elements;
 	char	**map;
 	char	**dummy_map;
 	char	**duplicates;
 	int		player_x;
 	int		player_y;
+
 }			t_parse_map;
 
 // Free N destroy
@@ -177,4 +225,7 @@ float		horizontal_or_vertical(t_data *data);
 
 void draw_textures(t_texture_data *textures, t_data *data);
 int get_color(t_texture_data *textures, int x, int y);
+
+char **get_elements(t_parse_map essentials, char *map);
+char *remove_spaces(char *str);
 #endif

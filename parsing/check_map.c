@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 21:15:48 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/05 15:50:46 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/07 00:10:26 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ int check_first_n_last(t_parse_map essentials)
 
 void check_map2(int fd, char *file)
 {
+    t_data *data = ft_calloc(1, sizeof(t_data));
+    data->call = ft_calloc(1, sizeof(t_map));
+    
     t_parse_map essentials;
     char *line;
     char *buffer;
@@ -128,8 +131,7 @@ void check_map2(int fd, char *file)
     check_valid_path(&essentials);
 
     // **************************************** AYOUB *********************************************
-    t_data *data = ft_calloc(1, sizeof(t_data));
-    data->call = ft_calloc(1, sizeof(t_map));
+    
 
     // int j = 0;
     // while (essentials.dummy_map[j])
