@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouram <abouram@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 01:34:34 by abouram           #+#    #+#             */
-/*   Updated: 2023/10/27 17:55:45 by abouram          ###   ########.fr       */
+/*   Updated: 2023/11/09 19:37:22 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	is_awall(t_data *data, double newx, double newy)
 
 void	move_player_c(t_data *data, int keycode, double newx, double newy)
 {
+	fix_r_angle(data);
 	if (keycode == 123)
 	{
 		newx = data->call->new_x + (MOVESPEED * cos(data->call->retation_angle
@@ -52,6 +53,7 @@ void	move_player_c(t_data *data, int keycode, double newx, double newy)
 
 void	move_player(t_data *data, int keycode)
 {
+	fix_r_angle(data);
 	if (keycode == 13)
 	{
 		data->newx = data->call->new_x + (MOVESPEED

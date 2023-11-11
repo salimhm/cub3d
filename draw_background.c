@@ -6,37 +6,64 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 01:54:48 by abouram           #+#    #+#             */
-/*   Updated: 2023/10/30 19:57:56 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/11 00:28:21 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	print_round(t_data *data)
+void get_rgb(t_data *data, t_texture_fc *floor_n_ceiling)
 {
-	int	i;
-	int	y;
+	char **ceiling;
+	char **floor;
+	char *color;
+	int i;
 
-	i = 0;
-	y = 0;
-	while (y < (HEIGHT_SCREEN / 2))
+	i = -1;
+	while (data->call->elements[++i])
 	{
-		i = 0;
-		while (i < WIDTH_SCREEN)
+		if (data->call->elements[i][0] == 'C')
 		{
-			my_mlx_pixel_put(data, i, y, 0x0dece2);
-			i++;
+			color = remove_spaces(data->call->elements[i]);
+			ceiling = ft_split(color, ',');
+			floor_n_ceiling->r_c = ft_atoi(ceiling[2]);
+			floor_n_ceiling->g_c = ft_atoi(ceiling[1]);
+			floor_n_ceiling->b_c = ft_atoi(ceiling[0]);
+			free2d(ceiling);
+			free(color);
 		}
-		y++;
+		if (data->call->elements[i][0] == 'F')
+		{
+			color = remove_spaces(data->call->elements[i]);
+			floor = ft_split(color, ',');
+			floor_n_ceiling->r_f = ft_atoi(floor[2]);
+			floor_n_ceiling->g_f = ft_atoi(floor[1]);
+			floor_n_ceiling->b_f = ft_atoi(floor[0]);
+			free2d(floor);
+			free(color);
+		}
 	}
-	while (y < HEIGHT_SCREEN)
+}
+
+void print_round(t_data *data)
+{
+	int i;
+	int y;
+
+	t_texture_fc floor_n_ceiling;
+	get_rgb(data, &floor_n_ceiling);
+	i = -1;
+	y = -1;
+	while (++y < (HEIGHT_SCREEN / 2))
 	{
-		i = 0;
-		while (i < WIDTH_SCREEN)
-		{
-			my_mlx_pixel_put(data, i, y, 0x884600);
-			i++;
-		}
-		y++;
+		i = -1;
+		while (++i < WIDTH_SCREEN)
+			my_mlx_pixel_put(data, i, y, create_trgb(0, floor_n_ceiling.r_c, floor_n_ceiling.g_c, floor_n_ceiling.b_c));
+	}
+	while (++y < HEIGHT_SCREEN)
+	{
+		i = -1;
+		while (++i < WIDTH_SCREEN)
+			my_mlx_pixel_put(data, i, y, create_trgb(0, floor_n_ceiling.r_f, floor_n_ceiling.g_f, floor_n_ceiling.b_f));
 	}
 }

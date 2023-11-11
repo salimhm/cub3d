@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 21:15:48 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/07 00:11:19 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/11 01:21:53 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void check_map2(int fd, char *file)
     essentials.map = ft_split(buffer, '\n');
     free(buffer);
     check_elements(essentials);
+    is_element_exist(&essentials);
     check_duplicates(&essentials);
     data->call->elements = get_elements(essentials, file);
     check_empty_lines(essentials, file);

@@ -14,7 +14,10 @@
 		"ratio": "c",
 		"complex": "c",
 		"get_next_line.h": "c",
-		"cub3d.h": "c"
+		"cub3d.h": "c",
+		"fcntl.h": "c",
+		"bitset": "c",
+		"sstream": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

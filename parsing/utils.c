@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 20:26:07 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/07 00:10:12 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/11 04:17:32 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,29 +46,42 @@ char **get_elements(t_parse_map essentials, char *map)
 	int fd;
 	char **elements;
 	char *line;
+	char **temp;
 
-	elements = malloc(sizeof(char *) * i);
 	i = 0;
-	j = 0;
-	fd = open(map, O_RDONLY);
-
 	while (check_elements_existance(essentials.duplicates[i]))
 		i++;
 
-	while (j < i)
-	{
-		line = get_next_line(fd);
-		elements[j] = ft_strdup(line);
-		// free(line);
-		j++;
-	}
+	// printf("%d\n", i);
+	elements = malloc(sizeof(char *) * 10 + 1);
+	j = 0;
+	fd = open(map, O_RDONLY);
 
 	i = 0;
-	while (elements[i])
+	line = get_next_line(fd);
+	while (line)
 	{
-		printf("%s", elements[i]);
-		i++;
+		temp = ft_split(line, ' ');
+		if (temp[0] && essentials.duplicates[i] && ft_strncmp(essentials.duplicates[i], temp[0], ft_strlen(temp[0]) + 1) == 0)
+		{
+			elements[i] = ft_strdup(line);
+			// printf("%s", elements[i]);
+			i++;
+		}
+		free2d(temp);
+		free(line);
+		line = get_next_line(fd);
 	}
+	free(line);
+
+	// printf("%d\n", i);
+	elements[i] = NULL;
+	// i = 0;
+	// while (elements[i])
+	// {
+	// 	printf("wwww %s", elements[i]);
+	// 	i++;
+	// }
 	return elements;
 }
 
@@ -80,16 +93,46 @@ char *remove_spaces(char *str)
 
 	i = 0;
 	j = 0;
-	str = ft_strchr(str, ' ');
-
-	new_str = ft_calloc(ft_strlen(str) - 1, 1);
-	while(str[i] == ' ')
+	str = ft_strchr2(str, ' ');
+	new_str = ft_calloc(ft_strlen(str), 1);
+	while (str[i] == ' ')
 		i++;
-	while(str[i] != '\n' || str[i] != '\0')
+	if (str[i] == 'N' || str[i] == 'S' || str[i] == 'W' || str[i] == 'E')
+	{
+		while (str[i] != ' ')
+			i++;
+		str = ft_strchr2(str, ' ');
+	}
+	if (i == 0)
+	{
+		while (str[i])
+		{
+			if (str[i] == '\n' || str[i] == ' ')
+				break;
+			new_str[j] = str[i];
+			i++;
+			j++;
+		}
+		return new_str;
+	}
+	while (str[i])
+	{
+		if (str[i] == '\n' || str[i] == ' ')
+			break;
 		new_str[j++] = str[i++];
-	new_str[j] = '\0';
-	// free(str);
-	
-	
+	}
 	return new_str;
+}
+
+int is_element_exist(t_parse_map *essentials)
+{
+	int i;
+
+	i = 0;
+	while (essentials->map[i])
+	{
+		// printf("%s\n", essentials->map[i]);
+		i++;
+	}
+	return 0;
 }

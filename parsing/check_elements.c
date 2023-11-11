@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 20:29:18 by shmimi            #+#    #+#             */
-/*   Updated: 2023/10/24 19:11:05 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/11 01:27:44 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,12 @@ void check_all_elements(t_parse_map essentials)
         element = ft_split(essentials.map[i], ' ');
         if (check_elements_existance(element[0]))
             j++;
+        else if (!check_elements_existance(element[0]) && element[0][0] != '1')
+        {
+            //free n destroy;
+            printf("Error: invalid map!\n");
+            exit(1);
+        }
         i++;
         free2d(element);
     }
@@ -92,6 +98,7 @@ int check_elements(t_parse_map essentials)
     while (i < 6)
     {
         element = ft_split(essentials.map[i], ' ');
+        // printf("%s\n", element[0]);
         if (ft_strlen_2d(element) != 2)
         {
             ft_putstr_fd("Error: invalid element\n", 2);

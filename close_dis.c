@@ -6,11 +6,12 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 01:52:14 by abouram           #+#    #+#             */
-/*   Updated: 2023/10/29 22:51:11 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/10 19:56:19 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
 void get_horizontal(t_data *data, double h_x, double h_y)
 {
 		data->horizontalx = h_x;

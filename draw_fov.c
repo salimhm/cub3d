@@ -6,17 +6,20 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:07:04 by abouram           #+#    #+#             */
-/*   Updated: 2023/11/06 21:08:12 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/11 05:53:12 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void dis_hit_wall(t_data *data, int h, int v)
+void	dis_hit_wall(t_data *data, int h, int v)
 {
-	while (data->incrmentx > 0 && ((int)data->incrmentx / WIDTH) < data->call->i && data->incrmenty > 0 && ((int)data->incrmenty / HEIGHT) < data->call->j)
+	while (data->incrmentx > 0 && ((int)data->incrmentx / WIDTH) < data->call->i
+		&& data->incrmenty > 0 && ((int)data->incrmenty
+			/ HEIGHT) < data->call->j)
 	{
-		if (data->call->map[((int)data->incrmenty) / HEIGHT][(int)data->incrmentx / WIDTH] == '1')
+		if (data->call->map[((int)data->incrmenty)
+				/ HEIGHT][(int)data->incrmentx / WIDTH] == '1')
 		{
 			if (h == 1)
 				data->h_hit = 1;
@@ -24,7 +27,7 @@ void dis_hit_wall(t_data *data, int h, int v)
 				data->v_hit = 1;
 			data->hitwallx = data->incrmentx;
 			data->hitwally = data->incrmenty;
-			break;
+			break ;
 		}
 		else
 		{
@@ -34,7 +37,7 @@ void dis_hit_wall(t_data *data, int h, int v)
 	}
 }
 
-float vertical(t_data *data, double h_x, double h_y)
+float	vertical(t_data *data, double h_x, double h_y)
 {
 	data_init(data);
 	fix_r_angle(data);
@@ -62,7 +65,7 @@ float vertical(t_data *data, double h_x, double h_y)
 	return (close_dis(data, h_x, h_y));
 }
 
-float horizontal_or_vertical(t_data *data)
+float	horizontal_or_vertical(t_data *data)
 {
 	data_init(data);
 	fix_r_angle(data);
@@ -93,10 +96,12 @@ float horizontal_or_vertical(t_data *data)
 
 void draw_fov_line(t_data *data)
 {
+	int color;
 
 	t_texture_data textures;
 
-	draw_textures(&textures, data);
+	// draw_textures(&textures, data);
+	load_textures(&textures, data);
 
 	data->i = 0;
 	data->j = 0;
@@ -105,20 +110,14 @@ void draw_fov_line(t_data *data)
 
 	while (data->i < WIDTH_SCREEN)
 	{
-		double textureWidth = (double)textures.img_width;
-		double textureHeight = (double)textures.img_height;
+		double textureWidth = (double)textures.north.img_width;
+		double textureHeight = (double)textures.north.img_height;
 		data->call->r_angle += ((2 * M_PI / 6) / (WIDTH_SCREEN));
 		data->dis_hit_wall = horizontal_or_vertical(data) * cos(data->call->r_angle - data->call->retation_angle);
 		data->point = (HEIGHT_SCREEN / data->dis_hit_wall) * data->fov;
 		data->y_start = (HEIGHT_SCREEN / 2) - (data->point / 2);
 		data->y_end = data->y_start + data->point;
-		if (data->y_start < 0)
-			data->y_start = 0;
-		if (data->y_end >= HEIGHT_SCREEN)
-			data->y_end = HEIGHT_SCREEN;
-
 		int y;
-
 		int x_offset;
 		int y_offset;
 
@@ -130,7 +129,20 @@ void draw_fov_line(t_data *data)
 		while (data->y_start < data->y_end)
 		{
 			y_offset = (data->y_start - y) * (textureHeight / data->point);
-			my_mlx_pixel_put(data, data->i, data->y_start, get_color(&textures, x_offset % (int)textureWidth, y_offset));
+			if (data->y_start >= HEIGHT_SCREEN)
+				break ;
+			if (data->y_start >= 0)
+			{
+				if (data->h < data->v && data->is_up)
+					color = get_color(&textures, x_offset % (int)textures.north.img_width, y_offset, 'N');
+				if (data->h < data->v && data->is_down)
+					color = get_color(&textures, x_offset % (int)textures.south.img_width, y_offset, 'S');
+				if (data->h > data->v && data->is_left)
+					color = get_color(&textures, x_offset % (int)textures.west.img_width, y_offset, 'W');
+				else if (data->h > data->v && data->is_right)
+					color = get_color(&textures, x_offset % (int)textures.east.img_width, y_offset, 'E');
+				my_mlx_pixel_put(data, data->i, data->y_start, color);
+			}
 			data->y_start++;
 		}
 

@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 12:49:45 by abouram           #+#    #+#             */
-/*   Updated: 2023/10/24 20:39:55 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/07 00:15:47 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 t_list	*ft_lstlast(t_list *lst);
 int		ft_lstsize(t_list *lst);
 void	ft_lstadd_front(t_list **lst, t_list *new);
+
+char	*ft_strchr2(char *s, int c);
 
 #endif

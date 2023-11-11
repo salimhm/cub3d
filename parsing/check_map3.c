@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 19:38:10 by shmimi            #+#    #+#             */
-/*   Updated: 2023/10/24 18:42:52 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/11 00:48:29 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,18 @@ char get_starting_pos(t_parse_map essentials)
     return 0;
 }
 
+void skip_newline(int fd, char *line)
+{
+    while (line && ft_strncmp(line, "\n", 2) == 0)
+    {
+        if (line[0] == '1' || line[0] == ' ')
+            return;
+        // printf("%s", line);
+        // free(line);
+        line = get_next_line(fd);
+    }
+}
+
 void check_empty_lines(t_parse_map essentials, char *file)
 {
     int i;
@@ -172,15 +184,24 @@ void check_empty_lines(t_parse_map essentials, char *file)
         free2d(essentials.duplicates);
         exit(1);
     }
+    skip_newline(fd, line);
     while (line)
     {
-        if (line && ft_strncmp(line, "\n", 2) == 0)
+        if (line[0] == '1' || line[0] == ' ')
         {
-            ft_putstr_fd("Error: \"\\n\" detected in between!\n", 2);
-            free(line);
-            free2d(essentials.map);
-            free2d(essentials.duplicates);
-            exit(1);
+            while (line)
+            {
+                if (line && ft_strncmp(line, "\n", 2) == 0)
+                {
+                    ft_putstr_fd("Error: \"\\n\" detected in between!\n", 2);
+                    free(line);
+                    free2d(essentials.map);
+                    free2d(essentials.duplicates);
+                    exit(1);
+                }
+                free(line);
+                line = get_next_line(fd);
+            }
         }
         free(line);
         line = get_next_line(fd);

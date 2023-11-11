@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:28:47 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/07 00:10:01 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/11 01:36:52 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIDTH			5
-# define HEIGHT			5
-# define MOVESPEED		1
+# define WIDTH			3
+# define HEIGHT			3
+# define MOVESPEED		1.2
 # define ROTATION 		0.0698132
 # define WIDTH_SCREEN	1800
 # define HEIGHT_SCREEN	1000
@@ -158,7 +158,6 @@ typedef struct s_texture_data
 
 typedef struct s_parse_map
 {
-	char 	**elements;
 	char	**map;
 	char	**dummy_map;
 	char	**duplicates;
@@ -166,6 +165,16 @@ typedef struct s_parse_map
 	int		player_y;
 
 }			t_parse_map;
+
+typedef struct s_texture_fc
+{
+	unsigned int r_f;
+	unsigned int g_f;
+	unsigned int b_f;
+	unsigned int r_c;
+	unsigned int g_c;
+	unsigned int b_c;
+}	t_texture_fc;
 
 // Free N destroy
 void		free2d(char **arg);
@@ -187,7 +196,7 @@ void		check_empty_lines(t_parse_map essentials, char *file);
 void		get_player_pos(t_parse_map essentials);
 void		check_route(t_parse_map essentials, int x, int y);
 char		get_starting_pos(t_parse_map essentials);
-
+int is_element_exist(t_parse_map *essentials);
 // Check map elements
 int			check_elements(t_parse_map essentials);
 int			is_coord(char *coord);
@@ -224,8 +233,11 @@ float		horizontal_or_vertical(t_data *data);
 
 
 void draw_textures(t_texture_data *textures, t_data *data);
-int get_color(t_texture_data *textures, int x, int y);
+int get_color(t_texture_data *textures, int x, int y, char direction);
+int create_trgb(int t, int r, int g, int b);
 
 char **get_elements(t_parse_map essentials, char *map);
 char *remove_spaces(char *str);
+
+void load_textures(t_texture_data *textures, t_data *data);
 #endif
