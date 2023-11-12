@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 20:29:18 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/12 10:28:40 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/12 22:27:10 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,21 @@ void	check_all_elements(t_parse_map essentials)
 	int		i;
 	int		j;
 
-	i = -1;
 	j = 0;
-	while (essentials.map[++i])
+	i = 0;
+	while (essentials.map[i])
 	{
 		element = ft_split(essentials.map[i], ' ');
 		if (check_elements_existance(element[0]))
 			j++;
-		else if (!check_elements_existance(element[0]) && element[0][0] != '1')
+		else if (element[0] && !check_elements_existance(element[0])
+			&& element[0][0] != '1')
 		{
-			// free n destroy;
 			printf("Error: invalid map!\n");
 			exit(1);
 		}
 		free2d(element);
+		i++;
 	}
 	if (j != 6)
 	{

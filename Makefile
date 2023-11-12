@@ -5,6 +5,7 @@ CFLAGS		=	#-fsanitize=address -g
 SRCS		=	cub3d.c print_map_scrin.c mlx_pixel_put.c move_player.c draw_player.c draw_dda_line.c init_data.c close_dis.c draw_background.c draw_fov.c fix_face_angledraw_ray.c\
 				draw_textures.c\
 				clear.c\
+				run.c\
 				$(SRCS_PARSING)\
 				$(GNL_SRCS)
 

@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:28:47 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/12 10:36:36 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/12 22:04:52 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,6 +196,8 @@ void		get_player_pos(t_parse_map essentials);
 void		check_route(t_parse_map essentials, int x, int y);
 char		get_starting_pos(t_parse_map essentials);
 int is_element_exist(t_parse_map *essentials);
+int	check_corners(t_parse_map essentials);
+int	check_first_n_last(t_parse_map essentials);
 // Check map elements
 int			check_elements(t_parse_map essentials);
 int			is_coord(char *coord);
@@ -246,4 +248,6 @@ void load_textures(t_texture_data *textures, t_data *data);
 void close_win(t_data *data);
 void free_n_destroy(t_data *data, t_parse_map *essentials);
 
+
+void init_game(t_parse_map *essentials, char *file);
 #endif
