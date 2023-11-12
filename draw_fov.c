@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:07:04 by abouram           #+#    #+#             */
-/*   Updated: 2023/11/11 05:53:12 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/12 01:38:21 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,21 @@ float	horizontal_or_vertical(t_data *data)
 	return (data->dis);
 }
 
+void check_textures(t_texture_data textures)
+{
+	if (textures.north.img_width == 32 || textures.north.img_width == 64)
+	{
+		if (textures.north.img_width == textures.south.img_width == textures.west.img_width == textures.south.img_width)
+			return ;
+	}
+	else
+	{
+		ft_putstr_fd("Textures must have the same width and height (32x32 or 64x)\n", 2);
+		//Free_n_destroy
+		exit(1);
+	}
+	return;
+}
 void draw_fov_line(t_data *data)
 {
 	int color;
@@ -102,6 +117,9 @@ void draw_fov_line(t_data *data)
 
 	// draw_textures(&textures, data);
 	load_textures(&textures, data);
+	
+	//Check if all images have the same width and height
+	check_textures(textures);
 
 	data->i = 0;
 	data->j = 0;
@@ -129,6 +147,7 @@ void draw_fov_line(t_data *data)
 		while (data->y_start < data->y_end)
 		{
 			y_offset = (data->y_start - y) * (textureHeight / data->point);
+			
 			if (data->y_start >= HEIGHT_SCREEN)
 				break ;
 			if (data->y_start >= 0)

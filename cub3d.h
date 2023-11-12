@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:28:47 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/11 01:36:52 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/12 10:36:36 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,6 @@ typedef struct s_data
 	double	verticaly;
 	double	horizontalx;
 	double	horizontaly;
-
-	
-
 	t_map	*call;
 }			t_data;
 
@@ -161,6 +158,7 @@ typedef struct s_parse_map
 	char	**map;
 	char	**dummy_map;
 	char	**duplicates;
+	int		count;
 	int		player_x;
 	int		player_y;
 
@@ -181,6 +179,7 @@ void		free2d(char **arg);
 
 // Utils
 int			ft_strlen_2d(char **str2d);
+int	get_num_lines(t_parse_map essentials);
 
 // Print map
 // void print_map(char **map);
@@ -190,7 +189,7 @@ int			check_map(int fd, char *map);
 void		check_map3(t_parse_map essentials);
 void		check_valid_path(t_parse_map *essentials);
 int			check_valid_path1(t_parse_map *essentials, int i, int *count);
-void		check_valid_path2(int i, int j, int count, t_parse_map essentials,char starting_pos);
+void		check_valid_path2(int i, int j, t_parse_map essentials,char starting_pos);
 void		check_valid_path3(t_parse_map essentials, int count, char starting_pos);
 void		check_empty_lines(t_parse_map essentials, char *file);
 void		get_player_pos(t_parse_map essentials);
@@ -203,6 +202,8 @@ int			is_coord(char *coord);
 int			is_rgb(char *rgb);
 void		rgb_check(char *rgbs, char **element, t_parse_map essentials);
 void		rgb_check2(char **rgb, char **element, t_parse_map essentials);
+void	rgb_check3(char **rgb, t_parse_map *essentials, char **element);
+void	rgb_check4(char *rgbs, char **element, t_parse_map *essentials, char **rgb);
 void		check_duplicates(t_parse_map *essentials);
 int			check_elements_existance(char *element);
 void		check_player_duplicates(t_parse_map essentials);
@@ -230,7 +231,7 @@ void		face_angel(t_data *data);
 void		fix_r_angle(t_data *data);
 float		horizontal_or_vertical(t_data *data);
 
-
+int mouse_move(int x, int y, void *param);
 
 void draw_textures(t_texture_data *textures, t_data *data);
 int get_color(t_texture_data *textures, int x, int y, char direction);
@@ -240,4 +241,9 @@ char **get_elements(t_parse_map essentials, char *map);
 char *remove_spaces(char *str);
 
 void load_textures(t_texture_data *textures, t_data *data);
+
+//Clearing
+void close_win(t_data *data);
+void free_n_destroy(t_data *data, t_parse_map *essentials);
+
 #endif

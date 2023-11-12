@@ -17,7 +17,8 @@
 		"cub3d.h": "c",
 		"fcntl.h": "c",
 		"bitset": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"math.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

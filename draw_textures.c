@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 23:12:15 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/11 04:21:29 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/12 09:49:29 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,16 @@ void load_textures(t_texture_data *textures, t_data *data)
         new_str = ft_strtrim(data->call->elements[i], " \n");
         if (new_str[0] == 'N')
         {
-            img_path = remove_spaces(data->call->elements[i]);
+            img_path = remove_spaces(new_str);
+            // printf("%s\n", img_path);
             if (img_path)
             {
                 img = mlx_xpm_file_to_image(data->mlx, img_path, &textures->north.img_width, &textures->north.img_height);
+                if (!img)
+                {
+                    // free_n_destroy();
+                    exit(1);
+                }
                 textures->north.img_addr = mlx_get_data_addr(img, &textures->north.bits_per_pixel, &textures->north.line_length,
                                                              &textures->north.endian);
             }
@@ -64,10 +70,15 @@ void load_textures(t_texture_data *textures, t_data *data)
         }
         else if (new_str[0] == 'S')
         {
-            img_path = remove_spaces(data->call->elements[i]);
+            img_path = remove_spaces(new_str);
             if (img_path)
             {
                 img = mlx_xpm_file_to_image(data->mlx, img_path, &textures->south.img_width, &textures->south.img_height);
+                if (!img)
+                {
+                    // free_n_destroy();
+                    exit(1);
+                }
                 textures->south.img_addr = mlx_get_data_addr(img, &textures->south.bits_per_pixel, &textures->south.line_length,
                                                              &textures->south.endian);
             }
@@ -75,10 +86,15 @@ void load_textures(t_texture_data *textures, t_data *data)
         }
         else if (new_str[0] == 'W')
         {
-            img_path = remove_spaces(data->call->elements[i]);
+            img_path = remove_spaces(new_str);
             if (img_path)
             {
                 img = mlx_xpm_file_to_image(data->mlx, img_path, &textures->west.img_width, &textures->west.img_height);
+                if (!img)
+                {
+                    // free_n_destroy();
+                    exit(1);
+                }
                 textures->west.img_addr = mlx_get_data_addr(img, &textures->west.bits_per_pixel, &textures->west.line_length,
                                                             &textures->west.endian);
             }
@@ -86,10 +102,15 @@ void load_textures(t_texture_data *textures, t_data *data)
         }
         else if (new_str[0] == 'E')
         {
-            img_path = remove_spaces(data->call->elements[i]);
+            img_path = remove_spaces(new_str);
             if (img_path)
             {
                 img = mlx_xpm_file_to_image(data->mlx, img_path, &textures->east.img_width, &textures->east.img_height);
+                if (!img)
+                {
+                    // free_n_destroy();
+                    exit(1);
+                }
                 textures->east.img_addr = mlx_get_data_addr(img, &textures->east.bits_per_pixel, &textures->east.line_length,
                                                             &textures->east.endian);
             }
