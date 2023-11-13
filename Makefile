@@ -1,45 +1,58 @@
-CC			=	cc
+CC				=		cc
 
-CFLAGS		=	#-fsanitize=address -g
+CFLAGS			=		#-fsanitize=address -g
 
-SRCS		=	cub3d.c print_map_scrin.c mlx_pixel_put.c move_player.c draw_player.c draw_dda_line.c init_data.c close_dis.c draw_background.c draw_fov.c fix_face_angledraw_ray.c\
-				draw_textures.c\
-				clear.c\
-				run.c\
-				./rendering/textures.c\
-				$(SRCS_PARSING)\
-				$(GNL_SRCS)
+SRCS			=		$(SRCS_PARSING)\
+						$(SRCS_RENDERING)\
+						$(GNL_SRCS)
 
-SRCS_PARSING	=	./parsing/utils.c \
-				./parsing/check_elements.c \
-				./parsing/rgb.c\
-				./parsing/check_map.c\
-				./parsing/check_map2.c\
-				./parsing/check_map3.c\
-				./parsing/norm_utils.c\
-				./parsing/norm_utils2.c\
+SRCS_PARSING	=		./parsing/utils.c \
+						./parsing/check_elements.c \
+						./parsing/rgb.c\
+						./parsing/check_map.c\
+						./parsing/check_map2.c\
+						./parsing/check_map3.c\
+						./parsing/norm_utils.c\
+						./parsing/norm_utils2.c\
 
-LIBFT		=	make -C ./libft
+SRCS_RENDERING	=		cub3d.c\
+						./rendering/print_map_scrin.c\
+						./rendering/mlx_pixel_put.c\
+						./rendering/move_player.c\
+						./rendering/draw_player.c\
+						./rendering/draw_dda_line.c\
+						./rendering/init_data.c\
+						./rendering/close_dis.c\
+						./rendering/draw_background.c\
+						./rendering/draw_fov.c\
+						./rendering/fix_face_angledraw_ray.c\
+						./rendering/draw_textures.c\
+						./rendering/clear.c\
+						./rendering/run.c\
+						./rendering/textures.c\
 
-GNL_SRCS	=	./gnl/get_next_line.c \
-				./gnl/get_next_line_utils.c
 
-OBJS		=	$(SRCS:%.c=%.o)
+LIBFT			=		make -C ./libft
 
-NAME		=	cub3D
+GNL_SRCS		=		./gnl/get_next_line.c \
+						./gnl/get_next_line_utils.c
 
-all: $(NAME)
+OBJS			=		$(SRCS:%.c=%.o)
 
-$(NAME): 	$(OBJS)
-			$(LIBFT)
-			$(CC) $(OBJS) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit ./libft/libft.a -o ./libft/libft.a -o $(NAME)
+NAME			=		cub3D
 
-clean:
-	rm -rf $(OBJS)
-	make fclean -C ./libft
+all				: 		$(NAME)
 
-fclean: clean
-	make fclean -C ./libft
-	rm -rf $(NAME)
+$(NAME)			: 		$(OBJS)
+						$(LIBFT)
+						$(CC) $(OBJS) $(CFLAGS) -lmlx -framework OpenGL -framework AppKit ./libft/libft.a -o ./libft/libft.a -o $(NAME)
 
-re: fclean all
+clean			:
+						rm -rf $(OBJS)
+						make fclean -C ./libft
+
+fclean			:		clean
+						make fclean -C ./libft
+						rm -rf $(NAME)
+
+re				:		fclean all

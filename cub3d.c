@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:28:34 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/13 01:25:23 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/13 07:14:03 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	move(int keycode, void *par)
 	move_player(data, keycode);
 	if (keycode == 53)
 		close_window(keycode, data);
-	print_map(data);
 	draw_fov_line(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:28:47 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/13 00:55:34 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/13 08:38:18 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,6 @@ void				check_weird_chars(t_parse_map essentials);
 int					check_map(int fd, char *file);
 
 // Ayoub
-void				print_map(t_data *data);
 void				draw_player(t_data *data, double x, double y);
 void				print_round(t_data *data);
 void				draw_fov_line(t_data *data);
