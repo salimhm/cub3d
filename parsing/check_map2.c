@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 23:17:20 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/12 10:33:07 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/13 01:08:02 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	check_valid_path(t_parse_map *essentials)
 	i++;
 	j = i + 1;
 	check_valid_path2(i, j, *essentials, starting_pos);
-	free2d(essentials->map);
 }
 
 void	check_valid_path4(t_parse_map *essentials, int i, char starting_pos)

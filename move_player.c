@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 01:34:34 by abouram           #+#    #+#             */
-/*   Updated: 2023/11/12 01:52:46 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/12 23:38:52 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,6 @@ void	move_player(t_data *data, int keycode)
 	{
 		data->call->retation_angle -= ROTATION;
 		draw_player(data, data->call->new_y, data->call->new_x);
-	}
-
-	if (keycode == 53)
-	{
-		printf("Heren\n");
-		// free_n_destroy(data, );
-		exit(0);
 	}
 	move_player_c(data, keycode, data->newx, data->newy);
 }

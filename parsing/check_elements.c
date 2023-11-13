@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 20:29:18 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/12 22:27:10 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/13 01:23:54 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	check_all_elements(t_parse_map essentials)
 	int		j;
 
 	j = 0;
-	i = 0;
-	while (essentials.map[i])
+	i = -1;
+	while (essentials.map[++i])
 	{
 		element = ft_split(essentials.map[i], ' ');
 		if (check_elements_existance(element[0]))
@@ -78,7 +78,6 @@ void	check_all_elements(t_parse_map essentials)
 			exit(1);
 		}
 		free2d(element);
-		i++;
 	}
 	if (j != 6)
 	{

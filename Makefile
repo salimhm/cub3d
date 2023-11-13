@@ -6,6 +6,7 @@ SRCS		=	cub3d.c print_map_scrin.c mlx_pixel_put.c move_player.c draw_player.c dr
 				draw_textures.c\
 				clear.c\
 				run.c\
+				./rendering/textures.c\
 				$(SRCS_PARSING)\
 				$(GNL_SRCS)
 

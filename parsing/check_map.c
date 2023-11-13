@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 21:15:48 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/12 22:21:17 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/13 01:24:06 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	check_map2(int fd, char *file)
 	char		*buffer;
 	int			i;
 
+	init_pointers(&essentials);
 	line = get_next_line(fd);
 	buffer = ft_strdup("");
 	while (line)
@@ -103,7 +104,6 @@ void	check_map2(int fd, char *file)
 		line = get_next_line(fd);
 	}
 	free(line);
-	close(fd);
 	essentials.map = ft_split(buffer, '\n');
 	free(buffer);
 	check_elements(essentials);

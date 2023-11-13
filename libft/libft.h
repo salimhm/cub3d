@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 12:49:45 by abouram           #+#    #+#             */
-/*   Updated: 2023/11/07 00:15:47 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/12 23:07:41 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		ft_isdigit(int c);
 int		ft_isascii(int c);
 int		ft_isalnum(int c);
 int		ft_atoi(const char *str);
-int	ft_strlen(const char *s);
+int		ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_bzero(void *s, size_t n);

@@ -12,16 +12,16 @@
 
 #include "cub3d.h"
 
-void get_horizontal(t_data *data, double h_x, double h_y)
+void	get_horizontal(t_data *data, double h_x, double h_y)
 {
-		data->horizontalx = h_x;
-		data->horizontaly = h_y;
+	data->horizontalx = h_x;
+	data->horizontaly = h_y;
 }
 
-void get_vertical(t_data *data)
+void	get_vertical(t_data *data)
 {
-		data->verticalx = data->incrmentx;
-		data->verticaly = data->incrmenty;
+	data->verticalx = data->incrmentx;
+	data->verticaly = data->incrmenty;
 }
 
 double	close_dis(t_data *data, double h_x, double h_y)

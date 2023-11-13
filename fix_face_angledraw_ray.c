@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:14:56 by abouram           #+#    #+#             */
-/*   Updated: 2023/11/09 16:55:15 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/12 22:30:28 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	fix_r_angle(t_data *data)
 		data->call->retation_angle += (2 * M_PI);
 	else if (data->call->retation_angle > 2 * M_PI)
 		data->call->retation_angle -= (2 * M_PI);
-	
 	if (data->call->r_angle < 0)
 		data->call->r_angle += (2 * M_PI);
 	else if (data->call->r_angle > 2 * M_PI)

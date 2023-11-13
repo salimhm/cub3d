@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:07:04 by abouram           #+#    #+#             */
-/*   Updated: 2023/11/12 01:38:21 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/13 01:21:17 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,77 +94,46 @@ float	horizontal_or_vertical(t_data *data)
 	return (data->dis);
 }
 
-void check_textures(t_texture_data textures)
+void	check_textures(t_texture_data textures)
 {
 	if (textures.north.img_width == 32 || textures.north.img_width == 64)
 	{
-		if (textures.north.img_width == textures.south.img_width == textures.west.img_width == textures.south.img_width)
+		if (textures.north.img_width == textures.south.img_width
+			== textures.west.img_width == textures.south.img_width)
 			return ;
 	}
 	else
 	{
-		ft_putstr_fd("Textures must have the same width and height (32x32 or 64x)\n", 2);
-		//Free_n_destroy
+		ft_putstr_fd("Textures must have the same width and\
+		height(32x32 or 64x)\n",
+			2);
 		exit(1);
 	}
-	return;
+	return ;
 }
-void draw_fov_line(t_data *data)
+
+void	draw_fov_line(t_data *data)
 {
-	int color;
+	t_texture_data	textures;
+	int				x_offset;
+	int				y_offset;
 
-	t_texture_data textures;
-
-	// draw_textures(&textures, data);
 	load_textures(&textures, data);
-	
-	//Check if all images have the same width and height
 	check_textures(textures);
-
 	data->i = 0;
 	data->j = 0;
 	data->fov = ((HEIGHT / 2) / (tan(M_PI / 6)));
 	data->call->r_angle = data->call->retation_angle - (M_PI / 6);
-
 	while (data->i < WIDTH_SCREEN)
 	{
-		double textureWidth = (double)textures.north.img_width;
-		double textureHeight = (double)textures.north.img_height;
 		data->call->r_angle += ((2 * M_PI / 6) / (WIDTH_SCREEN));
-		data->dis_hit_wall = horizontal_or_vertical(data) * cos(data->call->r_angle - data->call->retation_angle);
+		data->dis_hit_wall = horizontal_or_vertical(data)
+			* cos(data->call->r_angle - data->call->retation_angle);
 		data->point = (HEIGHT_SCREEN / data->dis_hit_wall) * data->fov;
 		data->y_start = (HEIGHT_SCREEN / 2) - (data->point / 2);
 		data->y_end = data->y_start + data->point;
-		int y;
-		int x_offset;
-		int y_offset;
-
-		if (data->h > data->v) // vertical
-			x_offset = (textureWidth / WIDTH) * (data->verticaly - (int)data->verticaly / WIDTH) * WIDTH;
-		else
-			x_offset = (textureWidth / WIDTH) * (data->horizontalx - (int)data->horizontalx / WIDTH) * WIDTH;
-		y = data->y_start;
-		while (data->y_start < data->y_end)
-		{
-			y_offset = (data->y_start - y) * (textureHeight / data->point);
-			
-			if (data->y_start >= HEIGHT_SCREEN)
-				break ;
-			if (data->y_start >= 0)
-			{
-				if (data->h < data->v && data->is_up)
-					color = get_color(&textures, x_offset % (int)textures.north.img_width, y_offset, 'N');
-				if (data->h < data->v && data->is_down)
-					color = get_color(&textures, x_offset % (int)textures.south.img_width, y_offset, 'S');
-				if (data->h > data->v && data->is_left)
-					color = get_color(&textures, x_offset % (int)textures.west.img_width, y_offset, 'W');
-				else if (data->h > data->v && data->is_right)
-					color = get_color(&textures, x_offset % (int)textures.east.img_width, y_offset, 'E');
-				my_mlx_pixel_put(data, data->i, data->y_start, color);
-			}
-			data->y_start++;
-		}
-
+		get_offsets(data, &textures, &x_offset, &y_offset);
+		render_textures(data, &textures, &x_offset, &y_offset);
 		data->i++;
 	}
 	print_map(data);
