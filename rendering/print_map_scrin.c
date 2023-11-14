@@ -60,5 +60,4 @@ void	print_map(t_data *data)
 		}
 		x++;
 	}
-	data->call->mapx = data->call->x;
 }

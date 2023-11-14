@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 21:31:25 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/13 08:39:18 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/14 09:28:04 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,17 @@ void	init_pointers(t_parse_map *essentials)
 int	mouse_move(int x, int y, void *param)
 {
 	t_data	*data;
-	double	a;
+	double	i;
 
 	data = param;
-	data->call->retation_angle = (tan((float)300 / (float)(2 * WIDTH_SCREEN
-					- x)) / WIDTH_SCREEN) * 1e5;
+	i = x - data->call->x_mouse;
+	data->call->retation_angle += i * 0.0009;
 	print_round(data);
 	draw_fov_line(data);
 	print_map(data);
 	print_rays(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	data->call->x_mouse = x;
 	return (0);
 }
 
@@ -61,7 +62,6 @@ void	init_game(t_parse_map *essentials, char *file)
 	t_data	*data;
 	int		i;
 
-	i = 0;
 	data = ft_calloc(1, sizeof(t_data));
 	data->call = ft_calloc(1, sizeof(t_map));
 	data->call->elements = get_elements(*essentials, file);
@@ -78,5 +78,12 @@ void	init_game(t_parse_map *essentials, char *file)
 		i++;
 	}
 	data->call->j = i;
+	if (data->call->i * WIDTH > WIDTH_SCREEN
+		|| data->call->j * HEIGHT > HEIGHT_SCREEN)
+	{
+		// free_n_destroy(data);
+		exit(1);
+	}
+	data->call->x_mouse = WIDTH_SCREEN / 2;
 	run(data, essentials);
 }

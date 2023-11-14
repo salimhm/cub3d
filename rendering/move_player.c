@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 01:34:34 by abouram           #+#    #+#             */
-/*   Updated: 2023/11/13 06:12:39 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/13 12:48:44 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,6 @@ void	move_player(t_data *data, int keycode)
 		draw_player(data, data->call->new_y, data->call->new_x);
 	}
 	move_player_c(data, keycode, data->newx, data->newy);
+	// data->call->retation_angle += data->call->x_mouse * (M_PI / 180);
+	// data->call->x_mouse += (int)(data->call->retation_angle * ( M_PI * 180));
 }

@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:28:47 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/13 08:38:18 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/14 09:26:04 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIDTH 3
-# define HEIGHT 3
+# define WIDTH 5
+# define HEIGHT 5
 # define MOVESPEED 1.2
 # define ROTATION 0.0698132
-# define WIDTH_SCREEN 1800
+# define WIDTH_SCREEN 2550
 # define HEIGHT_SCREEN 1000
 
 typedef struct s_parse_map
@@ -58,9 +58,9 @@ typedef struct s_arg
 	float			new_x;
 	float			new_y;
 	float			retation_angle;
-	float			mapx;
 	char			**map;
 	float			r_angle;
+	int				x_mouse;
 
 }					t_map;
 

@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:07:04 by abouram           #+#    #+#             */
-/*   Updated: 2023/11/13 08:39:08 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/13 11:19:04 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ float	vertical(t_data *data, double h_x, double h_y)
 	if (data->is_left == 1)
 	{
 		data->new_x = (int)(data->x / WIDTH) * WIDTH;
-		data->new_x -= 0.0000000001;
+		data->new_x -= 0.001;
 	}
 	data->new_y = data->y + (data->new_x - data->x) * tan(data->call->r_angle);
 	data->xstep = HEIGHT;
@@ -75,7 +75,7 @@ float	horizontal_or_vertical(t_data *data)
 	else if (data->is_up == 1)
 	{
 		data->new_y = (int)(data->y / HEIGHT) * HEIGHT;
-		data->new_y -= 0.0000000001;
+		data->new_y -= 0.001;
 	}
 	data->new_x = data->x + (data->new_y - data->y) / tan(data->call->r_angle);
 	data->ystep = HEIGHT;
@@ -136,5 +136,5 @@ void	draw_fov_line(t_data *data)
 		data->i++;
 	}
 	print_map(data);
-	print_rays(data);
+	// print_rays(data);
 }

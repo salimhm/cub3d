@@ -18,7 +18,12 @@
 		"fcntl.h": "c",
 		"bitset": "c",
 		"sstream": "c",
-		"math.h": "c"
+		"math.h": "c",
+		"__bit_reference": "c",
+		"__string": "c",
+		"ios": "c",
+		"memory": "c",
+		"type_traits": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

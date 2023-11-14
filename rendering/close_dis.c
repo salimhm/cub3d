@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 01:52:14 by abouram           #+#    #+#             */
-/*   Updated: 2023/11/13 08:38:53 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/14 09:25:39 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ double	close_dis(t_data *data, double h_x, double h_y)
 	if (data->h < data->v)
 	{
 		get_horizontal(data, h_x, h_y);
-		line(data, h_x, h_y, 0x4ec5cf);
+		// line(data, h_x, h_y, 0x4ec5cf);
 		return (data->h);
 	}
 	else
 	{
 		get_vertical(data);
-		line(data, data->incrmentx, data->incrmenty, 0x4ec5cf);
+		// line(data, data->incrmentx, data->incrmenty, 0x4ec5cf);
 		return (data->v);
 	}
 }
