@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:28:47 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/14 09:26:04 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/14 19:58:01 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,15 +174,10 @@ typedef struct s_texture_fc
 	unsigned int	b_c;
 }					t_texture_fc;
 
-// Free N destroy
-void				free2d(char **arg);
-
 // Utils
 int					ft_strlen_2d(char **str2d);
 int					get_num_lines(t_parse_map essentials);
 
-// Print map
-// void print_map(char **map);
 void				init_pointers(t_parse_map *essentials);
 // Check map
 int					check_map(int fd, char *map);
@@ -202,6 +197,7 @@ int					is_element_exist(t_parse_map *essentials);
 int					check_corners(t_parse_map essentials);
 int					check_first_n_last(t_parse_map essentials);
 // Check map elements
+void				check_elements_order(t_parse_map *essentials);
 int					check_elements(t_parse_map essentials);
 int					is_coord(char *coord);
 int					is_rgb(char *rgb);
@@ -216,11 +212,10 @@ void				rgb_check4(char *rgbs, char **element,
 void				check_duplicates(t_parse_map *essentials);
 int					check_elements_existance(char *element);
 void				check_player_duplicates(t_parse_map essentials);
+void				check_duplicates4(t_parse_map *essentials);
 void				check_weird_chars(t_parse_map essentials);
 
-int					check_map(int fd, char *file);
-
-// Ayoub
+// Rendering
 void				draw_player(t_data *data, double x, double y);
 void				print_round(t_data *data);
 void				draw_fov_line(t_data *data);
@@ -238,27 +233,24 @@ void				print_rays(t_data *data);
 void				face_angel(t_data *data);
 void				fix_r_angle(t_data *data);
 float				horizontal_or_vertical(t_data *data);
-
 int					mouse_move(int x, int y, void *param);
-
 void				draw_textures(t_texture_data *textures, t_data *data);
-int					get_color(t_texture_data *textures, int x, int y,
+unsigned int		get_color(t_texture_data *textures, int x, int y,
 						char direction);
+int					get_color_check(t_texture_data *textures, int x, int y);
 int					create_trgb(int t, int r, int g, int b);
-
 char				**get_elements(t_parse_map essentials, char *map);
 char				*remove_spaces(char *str);
-
 void				load_textures(t_texture_data *textures, t_data *data);
-
+int					check_textures(t_texture_data textures);
 //Clearing
-void				close_win(t_data *data);
+void				free2d(char **arg);
+int					close_win(t_data *data);
 void				free_n_destroy(t_data *data);
-
 void				init_game(t_parse_map *essentials, char *file);
 void				render_textures(t_data *data, t_texture_data *textures,
 						int *x_offset, int *y_offset);
 void				get_offsets(t_data *data, t_texture_data *textures,
-						int *x_offset, int *y_offset);
+						int *x_offset);
 int					close_window(int keycode, t_data *data);
 #endif
