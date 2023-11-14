@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 18:28:47 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/14 19:58:01 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/14 21:43:08 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIDTH 5
-# define HEIGHT 5
+# define WIDTH 3
+# define HEIGHT 3
 # define MOVESPEED 1.2
 # define ROTATION 0.0698132
 # define WIDTH_SCREEN 2550

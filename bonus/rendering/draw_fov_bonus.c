@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:07:04 by abouram           #+#    #+#             */
-/*   Updated: 2023/11/14 20:26:57 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/14 21:11:20 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ void	draw_fov_line(t_data *data)
 	int				y_offset;
 
 	load_textures(&textures, data);
-	check_textures(textures);
 	data->i = 0;
 	data->j = 0;
 	data->fov = ((HEIGHT / 2) / (tan(M_PI / 6)));
@@ -134,6 +133,4 @@ void	draw_fov_line(t_data *data)
 		render_textures(data, &textures, &x_offset, &y_offset);
 		data->i++;
 	}
-	print_map(data);
-	print_rays(data);
 }

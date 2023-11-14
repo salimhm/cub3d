@@ -1,9 +1,9 @@
-NO ./textures/64x64/vertopal.com_brick_brown-vines3_64x64.xpm
-SO ./textures/64x64/brick_gray2_1_.xpm
-WE ./textures/64x64/vertopal.com_brick_dark_4_11_64x64.xpm
-EA ./textures/64x64/vertopal.com_wall_vines5_64x64.xpm
+NO ./textures/MiConv.com__lab-metal2.xpm
+SO ./textures/MiConv.com__lab-metal3.xpm
+WE ./textures/MiConv.com__lab-metal4.xpm
+EA ./textures/MiConv.com__lab-metal1.xpm
 F 91,106,99
-C 255,178,87
+C 173,0,0
 
 
 

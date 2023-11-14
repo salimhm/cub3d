@@ -6,7 +6,7 @@
 /*   By: shmimi <shmimi@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/29 23:12:15 by shmimi            #+#    #+#             */
-/*   Updated: 2023/11/14 12:04:34 by shmimi           ###   ########.fr       */
+/*   Updated: 2023/11/14 21:10:45 by shmimi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	north_texture(t_texture_data *textures, t_data *data, char *new_str)
 					&textures->north.img_width, &textures->north.img_height);
 			if (!img)
 			{
+				ft_putstr_fd("Error: Couldn't open image!\n", 2);
+				free_n_destroy(data);
 				exit(1);
 			}
 			textures->north.img_addr = mlx_get_data_addr(img,
@@ -51,6 +53,8 @@ void	south_texture(t_texture_data *textures, t_data *data, char *new_str)
 					&textures->south.img_width, &textures->south.img_height);
 			if (!img)
 			{
+				ft_putstr_fd("Error: Couldn't open image!\n", 2);
+				free_n_destroy(data);
 				exit(1);
 			}
 			textures->south.img_addr = mlx_get_data_addr(img,
@@ -76,6 +80,8 @@ void	west_texture(t_texture_data *textures, t_data *data, char *new_str)
 					&textures->west.img_width, &textures->west.img_height);
 			if (!img)
 			{
+				ft_putstr_fd("Error: Couldn't open image!\n", 2);
+				free_n_destroy(data);
 				exit(1);
 			}
 			textures->west.img_addr = mlx_get_data_addr(img,
@@ -101,6 +107,8 @@ void	east_texture(t_texture_data *textures, t_data *data, char *new_str)
 					&textures->east.img_width, &textures->east.img_height);
 			if (!img)
 			{
+				ft_putstr_fd("Error: Couldn't open image!\n", 2);
+				free_n_destroy(data);
 				exit(1);
 			}
 			textures->east.img_addr = mlx_get_data_addr(img,
@@ -127,5 +135,12 @@ void	load_textures(t_texture_data *textures, t_data *data)
 		east_texture(textures, data, new_str);
 		free(new_str);
 		i++;
+	}
+	if (!check_textures(*textures))
+	{
+		free_n_destroy(data);
+		ft_putstr_fd("Textures must have the same width and\
+		height (32x32 or 64x)\n", 2);
+		exit(1);
 	}
 }
